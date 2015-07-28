@@ -1,0 +1,16 @@
+
+Authentication Process 
+
+download.file(url="http://curl.haxx.se/ca/cacert.pem", destfile="cacert.pem")//Windows users only
+
+requestURL <-"https://api.twitter.com/oauth/request_token"
+accessURL <- "https://api.twitter.com/oauth/access_token"
+authURL <-"https://api.twitter.com/oauth/authorize"
+consumerKey="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+consumerSecret="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+Cred <- OAuthFactory $new (consumerKey=consumerKey,consumerSecret=consumerSecret,requestURL=requestURL,accessURL=accessURL,authURL=authURL )
+Cred$handshake(cainfo="cacert.pem")
+
+registerTwitterOAuth(Cred)
+save(Cred, file="twitter_authentication.Rdata")
+load("twitter_authentication.Rdata")
